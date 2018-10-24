@@ -1,0 +1,9 @@
+<mat-card>
+  <form class="example-form" [formGroup]="forgotForm">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" [formControl]='email'>
+    </mat-form-field>
+    <button mat-button type="submit" color='primary' (click)='onSubmit(forgotForm.value)'>Submit</button>
+    <button mat-button (click)='backToLogin()'>Login Page</button>
+  </form>
+</mat-card>

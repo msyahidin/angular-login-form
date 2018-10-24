@@ -1,0 +1,32 @@
+<div class="container">
+  <mat-card *ngIf='loginMode' class='card-form'>
+    <form class="example-form" [formGroup]="loginForm">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" [formControl]='email'>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Password" type='password' [formControl]='password'>
+      </mat-form-field>
+      <button mat-button type="submit" color='primary' (click)='onSubmit(loginForm.value)' [disabled]='!loginForm.valid'>Submit</button>
+      <button mat-button (click)='toggleForm()'>Forgot Password</button>
+      <div *ngIf="email.touched || password.touched" class="alert alert-danger">
+        <mat-chip-list>
+          <div *ngIf='email.invalid'>
+            <mat-chip color="accent" selected *ngIf="email.errors.required"> Email is required.</mat-chip>
+            <mat-chip color="accent" selected *ngIf="email.errors.minlength"> Email must be at least 4 characters long.</mat-chip>
+            <mat-chip color="accent" selected *ngIf="email.errors.email">Email must be valid format</mat-chip>
+          </div>
+
+          <div *ngIf='password.invalid'>
+            <mat-chip color="accent" selected *ngIf="password.errors.required">Password is required</mat-chip>
+            <mat-chip color="accent" selected *ngIf="password.errors.minlength">Password must be at least 6 characters
+              long.</mat-chip>
+          </div>
+
+        </mat-chip-list>
+      </div>
+    </form>
+  </mat-card>
+
+  <app-forgot *ngIf='!loginMode' (modeChange)='toggleForm()'></app-forgot>
+</div>
